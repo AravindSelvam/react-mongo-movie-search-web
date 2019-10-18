@@ -2,6 +2,8 @@ import React from 'react'
 
 import {Button,Container,Row,Col} from 'react-bootstrap'
 import Table from 'react-bootstrap/Table'
+import { Redirect } from 'react-router-dom'
+
 
 const host ="http://localhost:8080"
 class ShowMovie extends React.Component{
@@ -27,15 +29,36 @@ class ShowMovie extends React.Component{
 
     }
 
+    setRedirect = () => {
+        this.setState({
+          redirect: true
+        })
+      }
+      renderRedirect = () => {
+        if (this.state.redirect) {
+          return <Redirect to='/movie' />
+        }
+      }
+
     
     render() {
           
         return(
         <div>
+            {this.renderRedirect()}
 
-            <h1>
-                Show Movie List
-            </h1>
+            <Container>
+                <Row >
+                    <Col xs lg="5">
+                    <h1>
+                        Show Movie List
+                    </h1>
+                    </Col>
+                    <Col xs lg="2">
+                    <Button onClick={this.setRedirect}> back</Button>
+                    </Col>
+                </Row >
+            </Container>
 
             <Table striped bordered hover size="sm">
                 <thead>

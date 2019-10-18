@@ -3,6 +3,9 @@ import React from 'react'
 import {Button,Container,Row,Col} from 'react-bootstrap'
 import Table from 'react-bootstrap/Table'
 
+import { Redirect } from 'react-router-dom'
+
+
 
 
 class Movie extends React.Component{
@@ -22,6 +25,21 @@ class Movie extends React.Component{
             })
             console.log(this.state.movieName)
     }
+
+    showMovies = () => {
+        return <Redirect to='/show-movie' />
+    }
+
+    setRedirect = () => {
+        this.setState({
+          redirect: true
+        })
+      }
+      renderRedirect = () => {
+        if (this.state.redirect) {
+          return <Redirect to='/show-movie' />
+        }
+      }
 
     searchMovie = () => {
         fetch('http://www.omdbapi.com/?type=movie&apikey=801b5c33&s='+this.state.movieName)
@@ -69,19 +87,24 @@ class Movie extends React.Component{
     render() {
         return (
             <div>
+                {this.renderRedirect()}
 
             <h1>
                 Create Movie
             </h1>
             <Container>
                 <Row className="justify-content-md-center">
-                    <Col xs lg="2">
+                    <Col xs lg="3">
                         <input type="text" placeholder="Enter Movie Name" value={this.state.value}
                         onChange={this.setMovieName}>
                         </input>
                     </Col>
                     <Col xs lg="2">
                     <Button onClick={this.searchMovie}> Search Movies</Button>
+                    </Col>
+
+                    <Col xs lg="2">
+                    <Button onClick={this.setRedirect}> Show Movies</Button>
                     </Col>
                 </Row>
             </Container>

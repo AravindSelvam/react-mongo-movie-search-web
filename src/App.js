@@ -15,19 +15,7 @@ function App() {
 
     <Router>
     <div>
-    <nav>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/movie">Movie</Link>
-        </li>
-        <li>
-          <Link to="/show-movie">Show Movie</Link>
-        </li>
-      </ul>
-    </nav>
+   
 
     <Switch>
       <Route path="/movie">
